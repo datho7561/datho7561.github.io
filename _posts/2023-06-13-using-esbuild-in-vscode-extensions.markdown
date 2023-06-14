@@ -25,7 +25,7 @@ If you develop a VS Code extension, one of the following has probably happened t
    This leads you to get distracted and doomscroll on Mastodon while waiting for the build to finish.
 
 Recently, I ran into the third issue,
-and decided to migrated portions of [vscode-openshift-tools](https://github.com/redhat-developer/vscode-openshift-tools)
+and decided to migrate portions of [vscode-openshift-tools](https://github.com/redhat-developer/vscode-openshift-tools)
 from `webpack` to [esbuild](https://esbuild.github.io/).
 This took bundling times down from 50 seconds down to under a second,
 which significantly sped up launching the extension in debug mode and running the test suites.
@@ -66,7 +66,7 @@ Here are some things that could prevent you from bundling your extension using `
 - You have a runtime dependency that does not work well with bundlers (even if it works with `webpack`)
 
     An example of this is [shelljs](https://github.com/shelljs/shelljs/issues/1035).
-    Keep in mind that you can probably find a library provides the same functionality but works with `esbuild`.
+    Keep in mind that you can probably find a library that provides the same functionality but works with `esbuild`.
     It can be hard to tell if your dependencies don't bundle well until you try bundling them,
     so I've included instructions for this as a part of the tutorial.
 - You rely on importing libraries inside of functions or classes instead of at the top of the file. eg:
