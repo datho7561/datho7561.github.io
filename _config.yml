@@ -35,6 +35,12 @@ theme: minima
 plugins:
   - jekyll-feed
 
+comments:
+  active: utterances
+  utterances:
+    repo: datho7561/datho7561.github.io
+    issue_term: title
+
 # Exclude from processing.
 # The following items will not be processed, by default.
 # Any item listed under the `exclude:` key here will be automatically added to
