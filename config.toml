@@ -1,0 +1,49 @@
+baseURL = 'https://datho7561.github.io/'
+languageCode = 'en-us'
+title = "datho7561's blog"
+theme = ['github.com/imfing/hextra']
+
+[outputs]
+home = ['html', 'rss']
+
+[params.theme]
+default = "light"
+displayToggle = false
+
+[params.navbar]
+displayLogo = false
+
+[[menu.main]]
+name = "About"
+pageRef = "about"
+
+[[menu.main]]
+name = "Blog"
+pageRef = "blog"
+
+[[menu.main]]
+name = "Blog RSS"
+url = "/index.xml"
+params = { icon = "rss" }
+
+[[menu.main]]
+name = "GitHub"
+url = "https://github.com/datho7561"
+params = { icon = "github" }
+
+[[menu.main]]
+name = "Mastodon"
+url = "https://mastodon.online/@datho7561"
+params = { icon = "mastodon" }
+
+[[menu.main]]
+name = "BlueSky"
+url = "https://datho7561.bsky.social/"
+params = { icon = "bluesky" }
+
+[[menu.main]]
+name = "LinkedIn"
+url = "https://www.linkedin.com/in/david-thompson-sfwr/"
+params = { icon = "linkedin" }
+
+

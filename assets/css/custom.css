@@ -1,0 +1,24 @@
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap');
+
+article p {
+  font-family: "Lora", serif;
+}
+
+nav span {
+  color: #0099FF;
+  text-shadow: 0px 0px 16px #0099FF99 !important;
+}
+
+nav img {
+  filter: invert(55%) sepia(100%) saturate(4367%) hue-rotate(184deg) brightness(104%) contrast(104%) drop-shadow(0 0 4px #0099FF99);
+}
+
+nav svg {
+  filter: invert(55%) sepia(100%) saturate(4367%) hue-rotate(184deg) brightness(104%) contrast(104%) drop-shadow(0 0 4px #0099FF99);
+}
+
+div.nav-container:has(nav) div {
+  background-color: rgb(38 38 38) !important;
+  box-shadow: 0 0 0.5rem rgb(38 38 38) !important;
+}
+

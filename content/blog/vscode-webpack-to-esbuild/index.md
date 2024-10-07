@@ -2,11 +2,13 @@
 layout: post
 title:  "Using esbuild for your VS Code Extensions"
 date:   2023-06-13 16:35:00 -0400
-categories: vscode esbuild
-permalink: /permalink/vscode-webpack-to-esbuild
+draft: false
+aliases:
+- /permalink/vscode-webpack-to-esbuild
+comments: true
 ---
 
-![An arrow pointing from the webpack icon to the esbuild icon, very evidently drawn hastily in a computer graphics program by an amateur](/assets/images/vscode-webpack-to-esbuild.png)
+![An arrow pointing from the webpack icon to the esbuild icon, very evidently drawn hastily in a computer graphics program by an amateur](vscode-webpack-to-esbuild.png)
 
 ## Motivation
 
@@ -70,7 +72,7 @@ Here are some things that could prevent you from bundling your extension using `
     It can be hard to tell if your dependencies don't bundle well until you try bundling them,
     so I've included instructions for this as a part of the tutorial.
 - You rely on importing libraries inside of functions or classes instead of at the top of the file. eg:
-{% highlight typescript %}
+```typescript
 async function activate(): Promise<void> {
     // the new import syntax
     const myCoolLibrary = await import('my-cool-library');
@@ -79,7 +81,7 @@ async function activate(): Promise<void> {
     const myOtherCoolLibrary = await require('my-other-cool-library');
     myOtherCoolLibrary.myFunction();
 }
-{% endhighlight %}
+```
 
 - If you are using a `webpack` configuration that allows you to import `.png` or `.svg` files using asynchronous imports,
 that also causes this problem.
@@ -109,9 +111,9 @@ that also causes this problem.
 
 In your project folder, run:
 
-{% highlight bash %}
+```bash
 npm i --save-dev esbuild
-{% endhighlight %}
+```
 
 Then, make sure your `package.json` is updated accordingly.
 Consider updating the `semver` [version range](https://docs.npmjs.com/about-semantic-versioning#using-semantic-versioning-to-specify-update-types-your-package-can-accept) listed for `esbuild`;
@@ -133,18 +135,18 @@ this means that somewhere in your code base,
 you have one or more TypeScript/JavaScript files that will be loaded into the HTML document corresponding to the Webview.
 In a React app, it usually looks something like this:
 
-{% highlight tsx %}
+```tsx
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { MyComponent } from './my-component.tsx';
 
 ReactDOM.render(<MyComponent></MyComponent>, document.getElementById('root'));
-{% endhighlight %}
+```
 
 Then, somewhere in your codebase, you will have an HTML file,
 a template for an HTML file, or a string that contains something like:
 
-{% highlight html %}
+```html
 <html>
   <head>
     <script src="%SCRIPT%"></script>
@@ -154,7 +156,7 @@ a template for an HTML file, or a string that contains something like:
     <div id="root"></div>
   </body>
 </html>
-{% endhighlight %}
+```
 
 where `%SCRIPT%` is replaced at runtime with the URI to the transpiled version of the script mentioned above.
 You will need to set all the scripts that you load into HTML webviews as entry points.
@@ -173,7 +175,7 @@ Writing an ES6 module file allows us to use top-level `await`, which is importan
 As far as I know, at the time of writing, there isn't an easy way to do this in TypeScript.
 In the file, add the following:
 
-{% highlight javascript %}
+```javascript
 import * as esbuild from 'esbuild';
 
 await esbuild.build(
@@ -186,7 +188,7 @@ await esbuild.build(
     target: 'node16',
     sourcemap: true,
 );
-{% endhighlight %}
+```
 
 This code assumes you have one entry point, `./src/extension.ts`, and bundles the code into `./out/extension.js`.
 Read more about the options to pass to it [in the docs](https://esbuild.github.io/getting-started/#bundling-for-node).
@@ -206,7 +208,7 @@ Some other things to consider about our `esbuild.mjs` script:
 
 Taking all that into account, here's what the `esbuild.mjs` might look like:
 
-{% highlight javascript %}
+```javascript
 import * as esbuild from 'esbuild';
 
 await Promises.all([
@@ -233,7 +235,7 @@ await Promises.all([
         sourcemap: true,
     )
 ]);
-{% endhighlight %}
+```
 
 This generates the following files:
 ```
@@ -283,7 +285,7 @@ out
 
 Unfortunately, the only way I could find to do this is through using multiple calls to `esbuild.build()`.
 I'd suggest something like this:
-{% highlight javascript %}
+```javascript
 await Promise.all(['webview1', 'webview2', 'webview3']
     .map(entrypoint => esbuild.build(
             entryPoints: [
@@ -297,24 +299,24 @@ await Promise.all(['webview1', 'webview2', 'webview3']
         )
     )
 );
-{% endhighlight %}
+```
 
 #### Images
 
 You might want to be able to reference images in your app using an import statement. eg.
 
-{% highlight javascript %}
+```javascript
 import MyProductIcon from '../../../images/icon.png';
 import MyProductIconSvg from '../../../images/icon.svg';
-{% endhighlight %}
+```
 
 In order to enable this, you can add this to your `esbuild` configuration:
-{% highlight javascript %}
+```javascript
 loader: {
     '.png': 'file',
     '.svg': 'file',
 },
-{% endhighlight %}
+```
 
 This will copy the images to the output folder,
 and will populate the variables with the path to the image as a string.
@@ -341,9 +343,9 @@ The first step is installing `npm-run-all`.
 You could get away with writing node scripts to combine tasks sequentially or in parallel,
 but using `npm-run-all` is much easier.
 
-{% highlight javascript %}
+```bash
 npm i --save-dev npm-run-all
-{% endhighlight %}
+```
 
 Now, we need to set up a few tasks:
 - A task to check types using `tsc` without producing `.js` files, using the `-noEmit` flag
@@ -354,7 +356,7 @@ Using `npm-run-all`, we can compose scripts in sequence using `run-s` and in par
 
 Here's a script that checks types and bundles the extension code in parallel:
 
-{% highlight jsonc %}
+```javascript
 {
     // ...
     "scripts": {
@@ -366,12 +368,12 @@ Here's a script that checks types and bundles the extension code in parallel:
     }
     // ...
 }
-{% endhighlight %}
+```
 
 If you have multiple entry points (with multiple `tsconfig` files),
 you will need to check types for each of them:
 
-{% highlight jsonc %}
+```json
 {
     // ...
     "scripts": {
@@ -385,14 +387,14 @@ you will need to check types for each of them:
     }
     // ...
 }
-{% endhighlight %}
+```
 
 Next, make sure that this step is run as a part of your `vscode:prepublish` step,
 so that it gets run when `vsce package` is called.
 For example, here is a prepublish script that cleans the `out` directory using the `shx` package,
 runs `eslint`, then bundles the source code:
 
-{% highlight jsonc %}
+```json
 {
     // ...
     "scripts": {
@@ -409,7 +411,7 @@ runs `eslint`, then bundles the source code:
     }
     // ...
 }
-{% endhighlight %}
+```
 
 Great! Now, our extension should be bundled properly when we run `vsce package`.
 
@@ -420,7 +422,7 @@ We need to adjust a few more configuration files so that the extension starts in
 In your `.vscode/launch.json`, find the task called "Extension Host".
 Here's an example of what it might look like:
 
-{% highlight jsonc %}
+```json
 {
     // ...
     "configurations": [
@@ -442,13 +444,13 @@ Here's an example of what it might look like:
         // ...
     ]
 }
-{% endhighlight %}
+```
 
 Make note of the name of the `preLaunchTask`.
 Open `.vscode/tasks.json`, and find the corresponding prelaunch task.
 Delete it, and replace it with the following task:
 
-{% highlight jsonc %}
+```json
 // ...
 {
     "label": "compile",
@@ -460,7 +462,7 @@ Delete it, and replace it with the following task:
     }
 }
 // ...
-{% endhighlight %}
+```
 
 This task runs the `npm` script we made earlier, and checks the output for any TypeScript errors before launching.
 Any errors on the output will prevent launch.
@@ -531,9 +533,9 @@ for references to `webpack` or `npm` scripts you've removed.
 
 Add the following line to `.vscodeignore` (create the file if it doesn't exist):
 
-{% highlight txt %}
+```
 node_modules
-{% endhighlight %}
+```
 
 Build the `.vsix`.
 Double check the size of the assembled `.vsix`; it should have shrunk.
