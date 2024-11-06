@@ -38,7 +38,7 @@ params = { icon = "mastodon" }
 
 [[menu.main]]
 name = "BlueSky"
-url = "https://datho7561.bsky.social/"
+url = "https://bsky.app/profile/datho7561.dev"
 params = { icon = "bluesky" }
 
 [[menu.main]]
