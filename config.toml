@@ -13,13 +13,23 @@ displayToggle = false
 [params.navbar]
 displayLogo = false
 
+[params.footer]
+enable = false
+
 [[menu.main]]
 name = "About"
 pageRef = "about"
+weight = 1
 
 [[menu.main]]
 name = "Blog"
 pageRef = "blog"
+weight = 1
+
+[[menu.main]]
+name = "Video Game Kanban"
+pageRef = "video-game-kanban"
+weight = 1
 
 [[menu.main]]
 name = "Blog RSS"
