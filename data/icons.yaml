@@ -36,3 +36,52 @@ bluesky: >
        id="path1"
        style="stroke-width:0.0440983" />
   </svg>
+codeberg: >
+  <svg
+    aria-label="Codeberg"
+    role="img"
+    viewBox="0 0 512 512"
+    version="1.1"
+    id="svg4"
+    sodipodi:docname="new-codeberg.svg"
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:svg="http://www.w3.org/2000/svg">
+    <defs
+      id="defs3">
+      <linearGradient
+        id="A"
+        x1="259.804"
+        x2="383.132"
+        y1="161.4"
+        y2="407.835"
+        gradientUnits="userSpaceOnUse"
+        gradientTransform="matrix(1.3332104,0,0,1.3332104,-85.278245,-95.724078)">
+        <stop
+          offset="0"
+          stop-color="#ffffff"
+          stop-opacity="0"
+          id="stop1" />
+        <stop
+          offset=".5"
+          stop-color="#71c2ff"
+          id="stop2" />
+        <stop
+          offset="1"
+          stop-color="#39aaff"
+          id="stop3" />
+      </linearGradient>
+    </defs>
+    <path
+      fill="url(#A)"
+      d="m 261.09514,119.45607 c -0.58661,0 -1.46653,0 -1.75983,0.58662 l -0.58662,1.46653 98.65224,369.65923 A 256.02838,256.02838 0 0 0 473.08359,391.92827 L 262.85631,120.33599 a 2.3491166,2.3491166 0 0 0 -1.76117,-0.88125 z"
+      opacity="0.5"
+      paint-order="stroke markers fill"
+      id="path3"
+      style="fill:url(#A);stroke-width:1.33321" />
+    <path
+      fill="#2185d0"
+      d="M 255.09036,4.2531085e-4 A 255.97639,255.97639 0 0 0 39.110285,391.96427 L 252.55726,115.98973 c 0.66661,-0.79993 1.99982,-1.33321 3.46635,-1.33321 1.46653,0 2.66642,0.53328 3.46635,1.33321 L 472.80361,391.96427 A 255.97639,255.97639 0 0 0 512,255.97681 C 512,114.65652 397.34391,4.2531085e-4 256.02361,4.2531085e-4 a 255.97639,255.97639 0 0 0 -0.93325,0 z"
+      paint-order="stroke markers fill"
+      id="path4"
+      style="stroke-width:1.33321" />
+  </svg>
