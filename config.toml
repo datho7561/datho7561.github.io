@@ -42,6 +42,11 @@ url = "https://github.com/datho7561"
 params = { icon = "github" }
 
 [[menu.main]]
+name = "Codeberg"
+url = "https://codeberg.org/datho7561"
+params = { icon = "codeberg" }
+
+[[menu.main]]
 name = "Mastodon"
 url = "https://mastodon.online/@datho7561"
 params = { icon = "mastodon" }
